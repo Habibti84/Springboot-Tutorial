@@ -1,7 +1,7 @@
 package ch.jmotzer.contentcalendar.controller;
 
 import ch.jmotzer.contentcalendar.model.Content;
-import ch.jmotzer.contentcalendar.repository.ContentCollectionRepository;
+import ch.jmotzer.contentcalendar.repository.ContentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,9 +13,9 @@ import java.util.List;
 //@CrossOrigin
 public class ContentController {
 
-    private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
-    public ContentController(final ContentCollectionRepository repository) {
+    public ContentController(final ContentRepository repository) {
         this.repository = repository;
     }
 
@@ -48,6 +48,6 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable final Integer id) {
-        this.repository.delete(id);
+        this.repository.deleteById(id);
     }
 }
