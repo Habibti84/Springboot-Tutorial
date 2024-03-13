@@ -1,6 +1,7 @@
 package ch.jmotzer.contentcalendar.controller;
 
 import ch.jmotzer.contentcalendar.model.Content;
+import ch.jmotzer.contentcalendar.model.Status;
 import ch.jmotzer.contentcalendar.repository.ContentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,15 @@ public class ContentController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable final Integer id) {
         this.repository.deleteById(id);
+    }
+
+    @GetMapping("filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable final String keyword) {
+        return this.repository.findAllByTitleContains(keyword);
+    }
+
+    @GetMapping("filter/status/{status}")
+    public List<Content> findByStatus(@PathVariable final Status status) {
+        return this.repository.findByStatus(status);
     }
 }
